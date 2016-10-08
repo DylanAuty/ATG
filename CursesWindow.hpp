@@ -9,14 +9,15 @@
 #ifndef CURSESWINDOW_HPP
 #define CURSESWINDOW_HPP
 
-class CursesWindow
-{
-	private:
-		int fullWidth;
-		int fullHeight;
+class CursesWindow {
 	public:
 		CursesWindow();		///< Constructor, initialises window.
 		~CursesWindow();	///< Destructor, handles window cleanup.
+	private:
+		void cwInit();		///< Runs through initial configuration of curses session.
+		void welcomeScr();	///< Displays a welcome screen (press any button to continue), to be used prior to subwindow setup.
+
+
 };
 
 #endif
