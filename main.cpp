@@ -3,19 +3,16 @@
  */
 
 #include <ncurses.h>
+#include "CursesWindow.hpp"
+
+using namespace std;
 
 int main(){
-	initscr();
-	noecho();	// Turn off input echoing
-	printw("Welcome! Press any button.");
-	refresh();
+	CursesWindow mainWindow;
 	int ch = getch();	// Wait for user input.
 	
 	
-	
-	
-	
-	endwin();
-
 	return 0;
 }
+
+
