@@ -19,11 +19,13 @@ void CursesWindow::cwInit() {
 	raw();			// Enable raw character input
 	noecho();				// Disable input echoing
 	keypad(stdscr, TRUE);	// Enable special key input
+	
+	getmaxyx(stdscr, this->lines, this->cols);
 	return;
 }
 
 void CursesWindow::welcomeScr() {
-	printw("Welcome to ATG. Press any key.");
+	mvprintw(this->lines/2, this->cols/2 - 21, "Welcome to ATG. Press any key to continue.");
 	refresh();
 	getch();
 	erase();
