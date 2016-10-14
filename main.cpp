@@ -34,7 +34,9 @@ int main(){
 			parentWin.lines = newParentWinLines;
 			parentWin.cols = newParentWinCols;
 			
-			// TODO: move resizing into a subroutine of CursesWindow that can call all subwindows and resize arbitrarily.
+			// TODO: move resizing + redrawing into a subroutine of CursesWindow that can resize all subwindows regardless of layout.
+			// Would need each window to have a start position and size, and can move based on that.
+			// Some windows will be resizable, some will be fixed size (e.g. message windows maybe, or menus).
 			wclear(stdscr);
 			wclear(mapWin);
 			wclear(debugRowWin);
@@ -58,11 +60,9 @@ int main(){
 		switch(ch){
 			case KEY_F(1):
 				return 0;
-			case '.':
-				break;
 			default:
 				wclear(debugRowWin);
-				mvwprintw(debugRowWin, 0, 0, "Unknown input.");
+				mvwprintw(debugRowWin, 0, 0, "Dims:%dx%d, Input %c", parentWin.lines, parentWin.cols, ch);
 				wrefresh(debugRowWin);
 				break;
 		}
