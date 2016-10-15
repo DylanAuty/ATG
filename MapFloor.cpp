@@ -12,9 +12,14 @@ MapFloor::MapFloor(int floorSizeY, int floorSizeX) {
 }
 
 void MapFloor::generate(int floorSizeY, int floorSizeX) {
-	for(int i = 0; i < 10; i++){
-		for(int j = 0; j < 10; j++){
-			this->tiles[i][j] = '@';
+	for(int i = 0; i < floorSizeY; i++){
+		for(int j = 0; j < floorSizeX; j++){
+			if(i == 0 || j == 0 || i == floorSizeY || j == floorSizeX){
+			this->tiles[i][j] = 1;
+			}
+			else{
+				this->tiles[i][j] = 2;
+			}
 		}
 	}
 	return;

@@ -14,7 +14,7 @@ class MapFloor {
 		MapFloor(int floorSizeY, int floorSizeX);
 		//~MapFloor();
 		
-		char tiles[100][100];	///< PLACEHOLDER: Contains the floor tiles, bool for now
+		int tiles[100][100] = {};	///< PLACEHOLDER: Contains the floor tiles, bool for now
 
 	private:
 		void generate(int floorSizeY, int floorSizeX);		///< Fills tile array with different kinds of tiles.
