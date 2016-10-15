@@ -21,7 +21,6 @@ class CursesWindow {
 		void cwInit();		///< Runs through initial configuration of curses session.
 		void welcomeScr();	///< Displays a welcome screen (press any button to continue), to be used prior to subwindow setup.
 
-
 };
 
 #endif
