@@ -26,9 +26,12 @@ int main(){
 	WINDOW* debugRowWin = newwin(1, parentWin.cols, parentWin.lines - 1, 0);
 	mvwprintw(debugRowWin, 0, 0, "Dims:%dx%d", parentWin.lines, parentWin.cols);
 	wrefresh(debugRowWin);
-	
+
 	// Create the map.
 	Map gameMap;
+	
+	mvwprintw(debugRowWin, 0, 30, "GameMap Created");
+	wrefresh(debugRowWin);
 
 
 	int ch;	// Input character
@@ -84,8 +87,6 @@ int main(){
 		redrawMap(mapWin, debugRowWin, gameMap, currMapY, currMapX, currFloor);
 
 	}
-
-
 	return 0;
 }
 
@@ -103,8 +104,24 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 			// Placeholder
 			//gameMap.floorVec[currFloor].tiles[y][x]
 			// TODO: FINISH SANITY CHECKING COORDINATES, THIS CAUSES SEGFAULTS NOW
+			// Moving across screen coords, two things to check each time:
+			// 		1) Does the corresponding map tile exist?
+			// 			- Corresponding map tile = (y + currMapY - 1, x + currMapX - 1)
+			// 		2) If so, what is it and what needs printing? (May delegate this job to a tile object which has a char field.)
+			mvwprintw(debugRowWin, 0, 30, "Curr:%dx%d", y, x);
+			wrefresh(debugRowWin);
 			if((y + currMapY - 1) >= 0 && (x + currMapX - 1) >= 0 && (y + currMapY - 1) <= 100 && (x + currMapX - 1) <= 100){
-				mvwaddch(mapWin, y, x, gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]);	// 1 to deal with border offset from window border drawing.
+				switch(gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]){
+					case 1:
+						mvwaddch(mapWin, y, x, '#');
+						break;
+					case 2:
+						mvwaddch(mapWin, y, x, '.');
+						break;
+					default:
+						break;
+				}
+				//mvwaddch(mapWin, y, x, gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]);	// 1 to deal with border offset from window border drawing.
 			}
 
 		}
