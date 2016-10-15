@@ -75,13 +75,31 @@ int main(){
 
 		// Fetch input
 		ch = getch();
+		// Debugging: display input key in debugging window.
+		wclear(debugRowWin);
+		mvwprintw(debugRowWin, 0, 0, "Dims:%dx%d, Input %c", parentWin.lines, parentWin.cols, ch);
+		wrefresh(debugRowWin);
+		
 		switch(ch){
-			case KEY_F(1):
+			case KEY_F(1):	// EXIT
 				return 0;
+			// Moving around the map view
+			// currMapY, currMapX denote current tile of the map that coincides with the top left coordinate of the view window.
+
+			case KEY_UP:	// Move view window up
+				currMapY -= 5;
+				break;
+			case KEY_DOWN:	// Move view window down
+				currMapY += 5;
+				break;
+			case KEY_LEFT:	// Move view window left
+				currMapX -= 5;
+				break;
+			case KEY_RIGHT:	// Move view window right
+				currMapX += 5;
+				break;
+			
 			default:
-				wclear(debugRowWin);
-				mvwprintw(debugRowWin, 0, 0, "Dims:%dx%d, Input %c", parentWin.lines, parentWin.cols, ch);
-				wrefresh(debugRowWin);
 				break;
 		}
 		redrawMap(mapWin, debugRowWin, gameMap, currMapY, currMapX, currFloor);
@@ -108,8 +126,9 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 			// 		1) Does the corresponding map tile exist?
 			// 			- Corresponding map tile = (y + currMapY - 1, x + currMapX - 1)
 			// 		2) If so, what is it and what needs printing? (May delegate this job to a tile object which has a char field.)
-			mvwprintw(debugRowWin, 0, 30, "Curr:%dx%d", y, x);
-			wrefresh(debugRowWin);
+			
+			//mvwprintw(debugRowWin, 0, 30, "Curr:%dx%d", y, x);
+			//wrefresh(debugRowWin);
 			if((y + currMapY - 1) >= 0 && (x + currMapX - 1) >= 0 && (y + currMapY - 1) <= 100 && (x + currMapX - 1) <= 100){
 				switch(gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]){
 					case 1:
