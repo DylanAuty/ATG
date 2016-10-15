@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall
 LDFLAGS=-lncurses
-SOURCES=main.cpp CursesWindow.cpp
+SOURCES=main.cpp CursesWindow.cpp Map.cpp MapFloor.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=ATG
 
