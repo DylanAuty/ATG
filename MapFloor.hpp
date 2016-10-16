@@ -14,6 +14,7 @@ class MapFloor {
 		MapFloor(int floorSizeY, int floorSizeX);
 		//~MapFloor();
 		
+		// TODO: Fix this hardcoded crap	
 		int tiles[100][100] = {};	///< PLACEHOLDER: Contains the floor tiles, bool for now
 
 	private:
