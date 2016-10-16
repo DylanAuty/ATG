@@ -40,6 +40,8 @@ int main(){
 	int currMapY = 0;
 	int currMapX = 0;	// For the coordinates of the map to be displayed in the top left corner of the map window.
 	int currFloor = 0;	// Current floor of the map.
+	
+	redrawMap(mapWin, debugRowWin, gameMap, currMapY, currMapX, currFloor);	// Draw map for the first time
 
 	// Main game loop.
 	while(1){
@@ -131,11 +133,11 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 			//wrefresh(debugRowWin);
 			if((y + currMapY - 1) >= 0 && (x + currMapX - 1) >= 0 && (y + currMapY - 1) <= 100 && (x + currMapX - 1) <= 100){
 				switch(gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]){
+					case 0:
+						mvwaddch(mapWin, y, x, ' ');
+						break;
 					case 1:
 						mvwaddch(mapWin, y, x, '#');
-						break;
-					case 2:
-						mvwaddch(mapWin, y, x, '.');
 						break;
 					default:
 						break;
