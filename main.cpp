@@ -100,7 +100,8 @@ int main(){
 			case KEY_RIGHT:	// Move view window right
 				currMapX += 5;
 				break;
-			
+			case 'r':
+				gameMap = Map();	// Reinitialise the game map to make checking layout easier
 			default:
 				break;
 		}
@@ -122,9 +123,6 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 	for(int y = 1; y < mapWinLines-1; y++){
 		for(int x = 1; x < mapWinCols-1; x++){
 			// Placeholder
-			//gameMap.floorVec[currFloor].tiles[y][x]
-			// TODO: FINISH SANITY CHECKING COORDINATES, THIS CAUSES SEGFAULTS NOW
-			// Moving across screen coords, two things to check each time:
 			// 		1) Does the corresponding map tile exist?
 			// 			- Corresponding map tile = (y + currMapY - 1, x + currMapX - 1)
 			// 		2) If so, what is it and what needs printing? (May delegate this job to a tile object which has a char field.)
@@ -132,7 +130,7 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 			//mvwprintw(debugRowWin, 0, 30, "Curr:%dx%d", y, x);
 			//wrefresh(debugRowWin);
 			if((y + currMapY - 1) >= 0 && (x + currMapX - 1) >= 0 && (y + currMapY - 1) <= 100 && (x + currMapX - 1) <= 100){
-				switch(gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]){
+				/*switch(gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]){
 					case 0:
 						mvwaddch(mapWin, y, x, ' ');
 						break;
@@ -142,6 +140,8 @@ void redrawMap(WINDOW* &mapWin, WINDOW* &debugRowWin, Map &gameMap, int currMapY
 					default:
 						break;
 				}
+				*/
+				mvwaddch(mapWin, y, x, gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]);
 				//mvwaddch(mapWin, y, x, gameMap.floorVec[currFloor].tiles[currMapY + y - 1][currMapX + x - 1]);	// 1 to deal with border offset from window border drawing.
 			}
 
