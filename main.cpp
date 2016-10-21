@@ -102,6 +102,7 @@ int main(){
 				break;
 			case 'r':
 				gameMap = Map();	// Reinitialise the game map to make checking layout easier
+				break;
 			default:
 				break;
 		}
