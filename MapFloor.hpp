@@ -15,11 +15,11 @@ class MapFloor {
 		//~MapFloor();
 		
 		// TODO: Fix this hardcoded crap	
-		int tiles[100][100] = {};	///< PLACEHOLDER: Contains the floor tiles, bool for now
+		int tiles[100][100];	///< PLACEHOLDER: Contains the floor tiles, bool for now
 
 	private:
 		void generate(int floorSizeY, int floorSizeX);		///< Fills tile array with different kinds of tiles.
-
+		int getDir(int prevDir, int weights[4]); ///< Returns a random direction for use with drunken walk generation.
 };
 
 #endif
